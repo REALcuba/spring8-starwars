@@ -9,7 +9,7 @@ const header: React.FC = () => {
           <img src={swlogo} alt="starwars logo" className='h-24 pl-24' />
         </picture>
         <div className='flex w-1/5'>
-          <button className='text-white '>LOGIN // SIGN UP</button>
+          <button className='text-gray-400 text-sm'>LOGIN // SIGN UP</button>
         </div>
       </header>
       <Menu />

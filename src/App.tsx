@@ -1,7 +1,7 @@
 //styles
 import './App.css'
 //components
-import HomePage from './pages/HomePage';
+import HomePage from './pages/MainPage';
 import Header from './components/header/Header';
 
 
