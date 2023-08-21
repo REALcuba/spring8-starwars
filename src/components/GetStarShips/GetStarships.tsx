@@ -1,40 +1,22 @@
-import { useEffect, useState } from "react"
-import fetchDataFromAPI from "../../utils/fetchDataFromAPI"
-import { type Starship } from "../../types/types";
 
-const GetStarships = () => {
-    const [starshipsData, setStarshipsData] = useState<Starship[]>([]);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        const fetchStarships = async () => {
-            try {
-                const data = await fetchDataFromAPI();
-                setStarshipsData(data.results);
-                console.log(data.results);
-
-                setLoading(false);
-            } catch (error) {
-                console.error('Error fetching starships data:', error);
-                setLoading(false);
-            }
-        };
-
-        fetchStarships();
-    }, []);
+import { type GetStarshipsProps, Starship } from "../../types/types";
+import { Link, } from "react-router-dom";
+const GetStarships: React.FC<GetStarshipsProps> = ({ loading, starshipsData }) => {
 
     return (
         <section className="bg-black flex justify-center" >
 
             {loading ? (
-                <p>Loading...</p>
+                <p className="text-gray-400">Loading...</p>
             ) : (
                 <ul className="flex flex-col space-y-4 my-8 container mx-auto">
-                    {starshipsData.map((starship, index) => (
+                        {starshipsData.map((starship: Starship, index: number) => (
 
-                        <li key={index} className="bg-neutral-950 flex text-gray-400 rounded-sm flex-col">
-                            <span className="mx-2 mt-2">{starship.name.toUpperCase()}</span>
-                            <span className="m-2 text-sm">{starship.model}</span>
+                            <li key={index} className="bg-neutral-950 flex text-gray-400 rounded-sm flex-col" >
+                                <Link to={`/starship-page/${index}`}>
+                                    <span className="mx-2 mt-2">{starship.name.toUpperCase()}</span>
+                                    <span className="m-2 text-sm">{starship.model}</span>
+                                </Link> 
                         </li>
                     ))}
                 </ul>
