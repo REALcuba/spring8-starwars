@@ -3,12 +3,12 @@ import Header from "../components/header/Header";
 import { type MainPageProps } from "../types/types";
 
 
-const MainPage: React.FC<MainPageProps> = ({ loading, starshipsData }) => {
+const MainPage: React.FC<MainPageProps> = ({ loading, starshipsData, handleScroll }) => {
 
   return (
     <>
       <Header />
-      <GetStarships loading={loading} starshipsData={starshipsData} />
+      <GetStarships loading={loading} starshipsData={starshipsData} handleScroll={handleScroll}/>
     </>
   
   );
