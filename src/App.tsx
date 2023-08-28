@@ -6,9 +6,8 @@ import './App.css'
 //components
 import MainPage from './pages/MainPage';
 import StarshipPage from './pages/StarshipPage';
-// import fetchDataFromAPI from './utils/fetchDataFromAPI';
 import { Starship } from './types/types';
-import axios from 'axios';
+import { Api } from './utils/fetchDataFromAPI';
 
 
 function App() {
@@ -16,23 +15,30 @@ function App() {
   const [data, setData] = useState<Starship[]>([]); // Datos a mostrar
   const [page, setPage] = useState(1); // Número de página actual
   const [loading, setLoading] = useState(false); // Estado de carga
-  // const [hasMore, setHasMore] = useState(true); // Nuevo estado para controlar si hay más datos
-  const [getResponse, setGetResponse] = useState([])
+  const [nextPage, setNextPage] = useState([])
 
   useEffect(() => {
     async function fetchData() {
       setLoading(true);
       try {
-        const response = await axios.get(`https://swapi.dev/api/starships/?page=${page}`);
+        const response = await Api.get(`/starships/?page=${page}`);
         console.log(response);
         const newData: [] = response.data.results;
-        setGetResponse(response.data.next)
+        setNextPage(response.data.next)
 
         setData(prevData => [...prevData, ...newData]);
         setLoading(false);
 
-      } catch (error) {
-        console.error('Error fetching data:', error);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } catch (error: any) {
+        if (error.response) {
+          console.log(error.response.data);
+          console.log(error.response.stat);
+          console.log(error.response.data);
+
+        } else {
+          console.error('Error fetching data:', error);
+        }
         setLoading(false);
       }
     }
@@ -44,7 +50,7 @@ function App() {
   const handleScroll = () => {
     if (
       window.innerHeight + document.documentElement.scrollTop >=
-      document.documentElement.offsetHeight - 50 
+      document.documentElement.offsetHeight - 25 
     ) {
       // if (getResponse !== null)
       
@@ -53,52 +59,14 @@ function App() {
   };
 
   useEffect(() => {
-    if (getResponse !== null) {
+    if (nextPage !== null) {
 
       window.addEventListener('scroll', handleScroll);
       return () => {
         window.removeEventListener('scroll', handleScroll);
       };
     }
-  }, [getResponse]);
-  //-----
-  // const [starshipsData, setStarshipsData] = useState<Starship[]>([]);
-  // const [page, setPage] = useState(1);
-
-  // const handleScroll = () => {
-  //   if (
-  //     window.innerHeight + document.documentElement.scrollTop >=
-  //     document.documentElement.offsetHeight - 50 // Ajusta este valor según tus necesidades
-  //   ) {
-  //     setPage(prevPage => prevPage + 1);
-
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   const fetchStarships = async () => {
-  //     try {
-  //       const data = await fetchDataFromAPI();
-  //       // console.log(data);
-
-  //       setStarshipsData(prevData => [...prevData, ...data.results]);
-
-  //       setLoading(false);
-  //     } catch (error) {
-  //       console.error('Error fetching starships data:', error);
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   fetchStarships();
-  // }, [page]);
-  // useEffect(() => {
-  //   window.addEventListener('scroll', handleScroll);
-  //   return () => {
-  //     window.removeEventListener('scroll', handleScroll);
-  //   };
-  // }, []);
-  // console.log(starshipsData);
+  }, [nextPage]);
   return (
     <Routes>
       <Route path='/' element={<MainPage loading={loading} starshipsData={data} handleScroll={handleScroll} />} />

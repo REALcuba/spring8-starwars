@@ -1,19 +1,32 @@
 import { useParams } from 'react-router-dom';
-import { StarshipPageProps } from '../types/types';
-
+import { Starship, StarshipPageProps } from '../types/types';
+import { starshipImg } from '../assets/img/starships/starshipsImg';
+import img from '../assets/img/starships/sentinel-class-landing-craft.jpeg'
 const StarshipPage: React.FC<StarshipPageProps> = ({ starshipsData }) => {
     const { index } = useParams();
 
     const starship = starshipsData[Number(index)];
-    console.log(starship);
-    const imgSrc = `https://starwars-visualguide.com/assets/img/starships/${index}.jpg`
+    const imgSrc: (starship: Starship) => string = (starship: Starship) => {
+        console.log(starship);
+
+        const foundShip = starshipImg.find(ship => ship.name === starship.name);
+        console.log(foundShip);
+
+        if (foundShip) {
+            return foundShip.img;
+        } else {
+
+            return `${img}`;
+        }
+
+    }
 
     return (
         <>
-            <section className='flex content-center flex-col justify-between items-center text-center text-white bg-spacebg h-screen'>
+            <section className='flex content-center flex-col justify-between items-center text-center text-white bg-spacebg'>
                 <h1>{starship.name.toUpperCase()}</h1>
                 <div>
-                    <picture><img src={imgSrc} alt="" /></picture>
+                    <picture><img src={imgSrc(starship)} alt="" /></picture>
                 </div>
                 <div className='pt-3 '>
                     <p>MODEL: <span className='uppercase text-gray-400'> {starship.model}</span> </p>
