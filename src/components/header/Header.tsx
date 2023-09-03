@@ -1,22 +1,45 @@
 import swlogo from '../../assets/img/swlogo.jpeg';
-import Menu from "../menu/Menu"
+import FBsvg from '../../assets/svg/brand-facebook-filled.svg';
+import instSvg from '../../assets/svg/brand-instagram.svg';
+import tw from '../../assets/svg/brand-twitter.svg';
+import yt from '../../assets/svg/brand-youtube.svg';
+import SearchBar from '../searchBar/SearchBar'
+import { useState } from 'react';
 
-const header: React.FC = () => {
+
+const Header = () => {
+  const [search, setSearch] = useState(false);
+
+  const handleCancelSearch: () => void = () => {
+    setSearch(!search)
+    console.log(search);
+
+  }
+
   return (
     <>
-      <header className=" bg-black flex flex-row justify-center ">
-        {/* <div className='container place-items-end'> */}
-        <picture className='basis-10/12 flex h-28 items-center justify-center pl-44'>
+      <header className=" bg-black grid grid-cols-4 justify-center ">
+        <div className=''>
+          <ul className='flex gap-2 items-center first:m-2 last:pe-2'>
+            <li><a href="https://www.instagram.com/starwars/" target='_blank' rel='noopener noreferrer'><img className="bg-white rounded  w-4" src={FBsvg} alt="" /></a></li>
+            <li><a href="https://www.instagram.com/starwars/" target='_blank' rel='noopener noreferrer'><img className="bg-white rounded  w-4" src={instSvg} alt="" /></a></li>
+            <li><a href="https://www.instagram.com/starwars/" target='_blank' rel='noopener noreferrer'><img className="bg-white rounded  w-4" src={tw} alt="" /></a></li>
+            <li><a href="https://www.instagram.com/starwars/" target='_blank' rel='noopener noreferrer'><img className="bg-white rounded  w-4" src={yt} alt="" /></a></li>
+          </ul>
+        </div>
+        <picture className=' col-span-2 h-28 flex items-center justify-center '>
           <img src={swlogo} alt="starwars logo" className='h-24 place-content-end' />
         </picture>
-        <div className='basis-2/12 content-center flex justify-end'>
-          <button className='text-gray-400 text-sm pr-6 basis-2/'>LOGIN // SIGN UP</button>
+        <div className='flex flex-row content-center justify-end gap-4 '>
+          <div className='flex items-center text-white' >
+            {search ? < SearchBar handleCancelSearch={handleCancelSearch} /> : <span onClick={handleCancelSearch}>SEARCH</span>}
+          </div>
+          <button className='text-gray-400 text-sm pr-6 /'>LOGIN</button>
         </div>
-        {/* </div> */}
       </header>
-      <Menu />
+
     </>
   )
 }
 
-export default header
+export default Header

@@ -35,3 +35,7 @@ export type GetStarshipsProps ={
 export type StarshipPageProps = {
     starshipsData: Starship[];
 }
+export type LoginProps = {
+    handleLogin: () => void
+
+}

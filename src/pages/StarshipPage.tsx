@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { Starship, StarshipPageProps } from '../types/types';
 import { starshipImg } from '../assets/img/starships/starshipsImg';
-import img from '../assets/img/starships/sentinel-class-landing-craft.jpeg'
+import imgPlaceholder from '../assets/img/placeholder.jpeg'
 const StarshipPage: React.FC<StarshipPageProps> = ({ starshipsData }) => {
     const { index } = useParams();
 
@@ -16,14 +16,14 @@ const StarshipPage: React.FC<StarshipPageProps> = ({ starshipsData }) => {
             return foundShip.img;
         } else {
 
-            return `${img}`;
+            return `${imgPlaceholder}`;
         }
 
     }
 
     return (
         <>
-            <section className='flex content-center flex-col justify-between items-center text-center text-white bg-spacebg'>
+            <section className='flex content-center flex-col justify-between items-center text-center text-white bg-spacebg bg-cover'>
                 <h1>{starship.name.toUpperCase()}</h1>
                 <div>
                     <picture><img src={imgSrc(starship)} alt="" /></picture>
