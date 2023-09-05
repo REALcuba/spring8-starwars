@@ -1,17 +1,17 @@
 import { type LoginProps } from '../types/types';
 import Header from '../components/header/Header';
-import Nav from '../components/nav/Nav';
+// import Nav from '../components/nav/Nav';
+import SignInForm from '../components/signInForm/SignInForm';
 
 const Login: React.FC<LoginProps> = ({ handleLogin }) => {
 
     return (
-        <section  className='h-screen'>
+        <section className='h-screen'>
             <Header />
-            <Nav/>
-            <div className='bg-black text-white flex flex-col h-full justify-center gap-4 items-center'>
-                <p>Welcome star figther</p>
-                <button className='bg-blue-500 rounded-2xl p-2' onClick={handleLogin}>Login</button>
-            </div>
+            {/* <Nav/> */}
+            <SignInForm handleLogin={handleLogin}/>
+            {/* <button className='bg-blue-500 rounded-2xl p-2' onClick={handleLogin}>Login</button> */}
+
         </section>
     )
 }
