@@ -1,15 +1,15 @@
 import { type LoginProps } from '../types/types';
 import Header from '../components/header/Header';
 // import Nav from '../components/nav/Nav';
-import SignInForm from '../components/signInForm/SignInForm';
+import LoginForm from '../components/loginForm/LoginForm';
 
-const Login: React.FC<LoginProps> = ({ handleLogin }) => {
+const Login: React.FC<LoginProps> = ({ setEmailValue, handleSubmitLogin, emailValue }) => {
 
     return (
         <section className='h-screen'>
             <Header />
             {/* <Nav/> */}
-            <SignInForm handleLogin={handleLogin}/>
+            <LoginForm setEmailValue={setEmailValue} handleSubmitLogin={handleSubmitLogin} emailValue={emailValue} />
             {/* <button className='bg-blue-500 rounded-2xl p-2' onClick={handleLogin}>Login</button> */}
 
         </section>

@@ -1,20 +1,25 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+//components
+import SearchBar from '../searchBar/SearchBar'
+// import Login from '../../pages/Landing';
+//imagenes
 import swlogo from '../../assets/img/swlogo.jpeg';
 import FBsvg from '../../assets/svg/brand-facebook-filled.svg';
 import instSvg from '../../assets/svg/brand-instagram.svg';
 import tw from '../../assets/svg/brand-twitter.svg';
 import yt from '../../assets/svg/brand-youtube.svg';
-import SearchBar from '../searchBar/SearchBar'
-import { useState } from 'react';
-
 
 const Header = () => {
   const [search, setSearch] = useState(false);
+  const navigate = useNavigate()
 
   const handleCancelSearch: () => void = () => {
     setSearch(!search)
     console.log(search);
 
   }
+  const getLogin = () => navigate('/login')
 
   return (
     <>
@@ -34,7 +39,11 @@ const Header = () => {
           <div className='flex items-center text-white' >
             {search ? < SearchBar handleCancelSearch={handleCancelSearch} /> : <span onClick={handleCancelSearch}>SEARCH</span>}
           </div>
-          <button className='text-gray-400 text-sm pr-6 /'>LOGIN</button>
+          <button className='text-gray-400 text-sm pr-6 /'
+            onClick={getLogin}
+          >
+            LOGIN
+          </button>
         </div>
       </header>
 

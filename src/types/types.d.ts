@@ -36,6 +36,11 @@ export type StarshipPageProps = {
     starshipsData: Starship[];
 }
 export type LoginProps = {
-    handleLogin: () => void
+    // handleLogin: () => void,
+    // emailValue:string
+    setEmailValue:()=>void, 
+    handleSubmitLogin: React.ReactNode, 
+    emailValue:string
+    
 
 }

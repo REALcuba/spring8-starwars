@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 // type useLocalStorageType<T> = [T, React.Dispatch<React.SetStateAction<T>>];
-export const UseLocaleStorage = (key:string|number, initialValue:string|number) => {
+export const UseLocaleStorage = (key: string, initialValue: string[]) => {
   const [storedValue, setStoredValue] = useState(() => {
     try {
       const item = window.localStorage.getItem(key);
@@ -10,7 +10,7 @@ export const UseLocaleStorage = (key:string|number, initialValue:string|number) 
       return initialValue;
     }
   });
-  const setValue = (value:string|number) => {
+  const setValue = (value:string) => {
     try {
       setStoredValue(value);
       window.localStorage.setItem(key, JSON.stringify(value));

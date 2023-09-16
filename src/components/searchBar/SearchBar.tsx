@@ -8,7 +8,7 @@ type inputSearchProps = {
 
     return (
         <label className='relative flex justify-end items-center'>
-            <input className='absolute h-6 rounded-md bg-slate-950 border-white ' type="text" />
+            <input className='absolute h-6 rounded-md bg-slate-950 border-white focus:border-none px-2' type="text" />
             <div className='absolute rigth-0 w-6  justify-center h-6 rounded-md'
                  onClick={handleCancelSearch}>
                 <img className="absolute rounded-md" src={X} alt="" />
