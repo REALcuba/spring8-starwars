@@ -1,12 +1,7 @@
 import { ChangeEvent } from "react"
-// import { UseLocaleStorage } from "../customHooks/UseLocaleStorage";
-// import { useNavigate } from "react-router-dom";
-// import bg from '../../assets/img/sw_background.jpeg'
-// type LoginFormProps = {
-//     // e: Event;
-//     handleLogin: () => void
-// }
-const LoginForm: React.FC = ({ setEmailValue, handleSubmitLogin, emailValue }) => {
+import { type LoginProps } from "../../types/types";
+
+const LoginForm: React.FC<LoginProps> = ({ setEmailValue, handleSubmitLogin, emailValue }) => {
     // const [isLogin, setIsLogin] = useState(false);
     // const [emailValue, setEmailValue] = useState('');
     // const [clientsArr, setClientsArr] = UseLocaleStorage("emails", []);

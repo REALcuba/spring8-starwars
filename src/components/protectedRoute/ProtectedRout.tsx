@@ -1,10 +1,13 @@
+// import { SetStateAction } from 'react';
 import { Navigate, Outlet, } from 'react-router-dom';
+import { type ProtectedRouteProps } from '../../types/types'
 
-type ProtectedRouteProps = {
-    user: '',
-    redirectPath: string,
-    children: React.ReactNode
-}
+
+// type ProtectedRouteProps = {
+//     user: SetStateAction<string> | undefined,
+//     redirectPath: string,
+//     children: React.ReactNode
+// }
 
 export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ user, redirectPath = '/login', children }) => {
     

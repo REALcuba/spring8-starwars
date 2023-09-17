@@ -1,5 +1,5 @@
 import { Route, Routes, useNavigate } from 'react-router-dom'
-import { useState, useEffect, FormEvent } from "react";
+import { useState, useEffect, FormEvent, SetStateAction } from "react";
 
 //styles
 import './App.css'
@@ -14,10 +14,6 @@ import { Api } from './utils/fetchDataFromAPI';
 import { ProtectedRoute } from './components/protectedRoute/ProtectedRout';
 import { UseLocaleStorage } from './components/customHooks/UseLocaleStorage';
 
-// type LoginProps = {
-//   handleLogin: () => void
-
-// }
 function App() {
 
   const [data, setData] = useState<Starship[]>([]); // Datos a mostrar
@@ -27,7 +23,7 @@ function App() {
   const [emailValue, setEmailValue] = useState<string>('');
   const [nameValue, setNameValue] = useState<string>('');
   const [clientsArr, setClientsArr] = UseLocaleStorage("emails", []);
-  const [user, setUser] = useState(null )
+  const [user, setUser] = useState<SetStateAction<string>>()
 
   const navigate = useNavigate()
 
@@ -64,7 +60,7 @@ const handleSubmitSignIn = (event: FormEvent<HTMLFormElement>) => {
       }
   
       setClientsArr(updatedClientsArr);
-      setUser(emailValue)
+  setUser(clientsArr)
 
       navigate("/main-page");
   
@@ -147,12 +143,12 @@ const handleSubmitSignIn = (event: FormEvent<HTMLFormElement>) => {
         {/* <Route path='/main-page' element={<MainPage loading={loading} starshipsData={data} handleScroll={handleScroll} />} /> */}
         <Route index element={<Landing />} />
        
-        <Route element={<ProtectedRoute user={user}/>}>
+      <Route element={<ProtectedRoute user={user} redirectPath={'login'} children={undefined} />}>
            <Route path='/main-page' element={<MainPage loading={loading} starshipsData={data} handleScroll={handleScroll} />} />
            <Route path='/starship-page/:index' element={<StarshipPage starshipsData={data} />} />
         </Route>
 
-          <Route path='/login' element={<Login setEmailValue={setEmailValue} handleSubmitLogin={handleSubmitLogin}/>} />
+      <Route path='/login' element={<Login setEmailValue={setEmailValue} handleSubmitLogin={handleSubmitLogin} emailValue={emailValue} />} />
           <Route path='/sign-in' element={<SignIn handleSubmitSignIn={handleSubmitSignIn} setNameValue={setNameValue} setEmailValue={setEmailValue} emailValue={emailValue}/>} />
        
       <Route path="*" element={<p>There's nothing here: 404!</p>} />

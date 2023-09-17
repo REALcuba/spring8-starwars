@@ -1,9 +1,9 @@
-// import { type LoginProps } from '../types/types';
+import { type SignInProps } from '../types/types';
 import Header from '../components/header/Header';
 // import Nav from '../components/nav/Nav';
 import SignInForm from '../components/signInForm/SignInForm';
 
-const Login: React.FC = ({handleSubmitSignIn, setEmailValue, setNameValue, emailValue}) => {
+const SignIn: React.FC<SignInProps> = ({ handleSubmitSignIn, setEmailValue, setNameValue, emailValue }) => {
 
     return (
         <section className='h-screen'>
@@ -21,4 +21,4 @@ const Login: React.FC = ({handleSubmitSignIn, setEmailValue, setNameValue, email
     )
 }
 
-export default Login
+export default SignIn

@@ -27,20 +27,32 @@ export type Starship = {
     url: string
    
 }
+
 export type GetStarshipsProps ={
     loading: boolean;
     starshipsData: Starship[];
     handleScroll: ()=>void
 }
+
 export type StarshipPageProps = {
     starshipsData: Starship[];
 }
-export type LoginProps = {
-    // handleLogin: () => void,
-    // emailValue:string
-    setEmailValue:()=>void, 
-    handleSubmitLogin: React.ReactNode, 
-    emailValue:string
-    
 
+export type LoginProps = {
+    setEmailValue:Dispatch<SetStateAction<string>>, 
+    handleSubmitLogin: FormEventHandler<HTMLFormElement> | undefined, 
+    emailValue:string
+}
+
+export type SignInProps = {
+    setNameValue:Dispatch<SetStateAction<string>>,
+    setEmailValue:Dispatch<SetStateAction<string>>, 
+    // handleSubmitLogin: React.ReactNode, 
+    handleSubmitSignIn: FormEventHandler<HTMLFormElement> | undefined, 
+    emailValue:string
+}
+export type ProtectedRouteProps = {
+    user: SetStateAction<string> | undefined,
+    redirectPath: string,
+    children: React.ReactNode
 }
