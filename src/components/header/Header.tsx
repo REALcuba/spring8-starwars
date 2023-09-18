@@ -25,11 +25,12 @@ const Header = () => {
     <>
       <header className=" bg-black grid grid-cols-4 justify-center ">
         <div className=''>
-          <ul className='flex gap-2 items-center first:m-2 last:pe-2'>
+          <ul className='flex gap-2 items-center m-2 justify-end'>
             <li><a href="https://www.instagram.com/starwars/" target='_blank' rel='noopener noreferrer'><img className="bg-white rounded  w-4" src={FBsvg} alt="" /></a></li>
-            <li><a href="https://www.instagram.com/starwars/" target='_blank' rel='noopener noreferrer'><img className="bg-white rounded  w-4" src={instSvg} alt="" /></a></li>
-            <li><a href="https://www.instagram.com/starwars/" target='_blank' rel='noopener noreferrer'><img className="bg-white rounded  w-4" src={tw} alt="" /></a></li>
-            <li><a href="https://www.instagram.com/starwars/" target='_blank' rel='noopener noreferrer'><img className="bg-white rounded  w-4" src={yt} alt="" /></a></li>
+            <li><a href="https://twitter.com/starwars" target='_blank' rel='noopener noreferrer'><img className="bg-white rounded  w-4" src={instSvg} alt="" /></a></li>
+            <li><a href="https://www.facebook.com/starwars.es/?brand_redir=169299103121699" target='_blank' rel='noopener noreferrer'><img className="bg-white rounded  w-4" src={tw} alt="" /></a></li>
+            <li><a href="https://www.youtube.com/user/starwars" target='_blank' rel='noopener noreferrer'><img className="bg-white rounded  w-4" src={yt} alt="" /></a></li>
+            <li className='border-s'><a href="https://www.starwarskids.com/" target='_blank' rel='noopener noreferrer'><img className="bg-white rounded mx-4" src='https://lumiere-a.akamaihd.net/v1/images/sw_nav_kids_937ed58b.svg?region=0%2C0%2C40%2C15' alt="" /></a></li>
           </ul>
         </div>
         <picture className=' col-span-2 h-28 flex items-center justify-center '>

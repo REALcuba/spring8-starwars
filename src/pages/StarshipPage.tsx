@@ -2,12 +2,14 @@ import { useParams } from 'react-router-dom';
 import { Starship, StarshipPageProps } from '../types/types';
 import { starshipImg } from '../assets/img/starships/starshipsImg';
 import imgPlaceholder from '../assets/img/placeholder.jpeg'
+import PilotsCard from '../components/pilotsCard/PilotsCard';
+
 const StarshipPage: React.FC<StarshipPageProps> = ({ starshipsData }) => {
     const { index } = useParams();
-
     const starship = starshipsData[Number(index)];
+    // const url = starship.url;
+    const pilots = starship.pilots;
     const imgSrc: (starship: Starship) => string = (starship: Starship) => {
-        console.log(starship);
 
         const foundShip = starshipImg.find(ship => ship.name === starship.name);
         console.log(foundShip);
@@ -49,9 +51,10 @@ const StarshipPage: React.FC<StarshipPageProps> = ({ starshipsData }) => {
                     </div>
                 </aside>
             </section >
-            <footer className='bg-black text-gray-400'>
-                <p>PILOTS: {starship.pilots}</p>
-            </footer>
+            <section className='flex justify-center items-center bg-black h-52'>
+            
+                <PilotsCard pilots={pilots} />
+            </section>
         </>
     );
 };

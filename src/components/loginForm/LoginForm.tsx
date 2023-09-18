@@ -2,72 +2,14 @@ import { ChangeEvent } from "react"
 import { type LoginProps } from "../../types/types";
 
 const LoginForm: React.FC<LoginProps> = ({ setEmailValue, handleSubmitLogin, emailValue }) => {
-    // const [isLogin, setIsLogin] = useState(false);
-    // const [emailValue, setEmailValue] = useState('');
-    // const [clientsArr, setClientsArr] = UseLocaleStorage("emails", []);
-    // const [localeStorageClient, setLocaleStorageClient] = UseLocaleStorage("emails", [])
-    // const navigate = useNavigate()
-
 
     const inputClassName = emailValue != '' ? 'pointer-events-none absolute top-[-10px] mb-0 max-w-[90%] text-[0.80rem] dark:text-neutral-200 left-1  text-neutral-500 ' : 'pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[2.15] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[1.15rem] peer-focus:-translate-x-[0.5rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[1.15rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary'
 
     const handleEmailValue = (event: ChangeEvent<HTMLInputElement>) => setEmailValue(event.target.value);
 
-
-    // const handleSubmitLogin = () => {
-    //     if (emailValue.trim() === "") {
-    //         alert("Por favor, ingresa un correo válido");
-    //         return;
-    //     }
-
-    // const updatedClientsArr = [...clientsArr, emailValue];
-    // setClientsArr(updatedClientsArr);
-    // if (clientsArr.includes(emailValue)) {
-    //    navigate("/main-page");
-
-    // }else{
-
-    //     navigate('/sign-in')
-    // }
-    // setEmailValue("");
-
-    // };
-
-    // console.log(emailValue);
-    // const handleSubmitLogin = () => {
-    //     if (emailValue.trim() === '') {
-    //         alert('Por favor, ingresa un correo válido');
-    //         return;
-    //     }
-    //     // setLocaleStorageClient(updatedClientsArr);
-    //     const updatedClientsArr:string[] = [...clientsArr, emailValue]
-    //     setClientsArr(updatedClientsArr)
-    //     // setClientsArr(localeStorageClient)
-    //     // setEmailValue("");
-
-    // }
-    // console.log(isLogin);
-    // console.log(clientsArr);
-
-
-    // useEffect(() => {
-    // Comprueba si el correo electrónico existe en el localStorage
-    // if (!clientsArr.includes(emailValue)) {
-    //     // Si existe, redirige al usuario a la página principal
-    //     // navigate("/mainPage");
-    // //    navigate('/sign-in')
-    //    navigate("/mainPage");
-
-    // }
-
-
-    //     navigate('/sign-in')
-
-    // }, [clientsArr, emailValue, navigate]);
-
     return (
         <>
-            <section className='bg-black  flex h-full justify-center gap-4 items-center bg-spacebg bg-cover bg-center'>
+            <section className='bg-black  flex justify-center items-center bg-spacebg bg-cover bg-center p-6'>
                 {/* <p>Welcome star figther</p> */}
                 {/* <!-- Right column container with form --> */}
                 <div className="md:w-6/12 lg:ml-6 lg:w-5/12 bg-white flex gap-4 rounded-lg justify-center ">

@@ -2,7 +2,7 @@ import { Route, Routes, useNavigate } from 'react-router-dom'
 import { useState, useEffect, FormEvent, SetStateAction } from "react";
 
 //styles
-import './App.css'
+// import './App.css'
 //components
 import Landing from './pages/Landing';
 import MainPage from './pages/MainPage';
@@ -13,6 +13,7 @@ import { Starship } from './types/types';
 import { Api } from './utils/fetchDataFromAPI';
 import { ProtectedRoute } from './components/protectedRoute/ProtectedRout';
 import { UseLocaleStorage } from './components/customHooks/UseLocaleStorage';
+import Footer from './components/footer/Footer';
 
 function App() {
 
@@ -29,7 +30,6 @@ function App() {
 
   const handleSubmitLogin = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    // const updatedClientsArr = [...clientsArr, emailValue];
     if (emailValue.trim() === "" ) {
         alert(`Por favor, ingresa un correo valido`);
         return;
@@ -42,16 +42,12 @@ function App() {
   
           navigate('/sign-in')
       }
-    // setClientsArr(updatedClientsArr);
-    // navigate("/main-page");
+
     setUser(emailValue)
-    // setEmailValue("");
-    // setNameValue("")
 
-};
-console.log(emailValue);
+  };
 
-const handleSubmitSignIn = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmitSignIn = (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault()
       const updatedClientsArr = [...clientsArr, emailValue];
       if (emailValue.trim()==="" || nameValue.trim() === "") {
@@ -60,13 +56,10 @@ const handleSubmitSignIn = (event: FormEvent<HTMLFormElement>) => {
       }
   
       setClientsArr(updatedClientsArr);
-  setUser(clientsArr)
+    setUser(clientsArr)
 
       navigate("/main-page");
-  
-      // setEmailValue("");
-      // setNameValue("")
-  
+
   };
   // const [clientsArr, setClientsArr] = useState([]);
   // const [localeStorageClient, setlocaleStorageClient] = UseLocaleStorage("email", '')
@@ -95,7 +88,6 @@ const handleSubmitSignIn = (event: FormEvent<HTMLFormElement>) => {
       setLoading(true);
       try {
         const response = await Api.get(`/starships/?page=${page}`);
-        console.log(response);
         const newData: [] = response.data.results;
         setNextPage(response.data.next)
 
@@ -138,6 +130,7 @@ const handleSubmitSignIn = (event: FormEvent<HTMLFormElement>) => {
   }, [nextPage]);
 
   return (
+    <>
     <Routes>
       
         {/* <Route path='/main-page' element={<MainPage loading={loading} starshipsData={data} handleScroll={handleScroll} />} /> */}
@@ -153,6 +146,8 @@ const handleSubmitSignIn = (event: FormEvent<HTMLFormElement>) => {
        
       <Route path="*" element={<p>There's nothing here: 404!</p>} />
     </Routes>
+      <Footer />
+    </>
   )
 }
 
