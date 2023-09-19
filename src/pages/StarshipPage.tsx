@@ -2,26 +2,38 @@ import { useParams } from 'react-router-dom';
 import { Starship, StarshipPageProps } from '../types/types';
 import { starshipImg } from '../assets/img/starships/starshipsImg';
 import imgPlaceholder from '../assets/img/placeholder.jpeg'
-import PilotsCard from '../components/pilotsCard/PilotsCard';
+import Cards from '../components/card/Cards';
+// import { useEffect } from 'react';
+// import {  useState } from 'react';
+// import { Api } from '../utils/fetchDataFromAPI';
+// import { Api } from '../utils/fetchDataFromAPI';
+import useGetNameData from '../components/customHooks/useGetNameData';
+
 
 const StarshipPage: React.FC<StarshipPageProps> = ({ starshipsData }) => {
+ 
     const { index } = useParams();
     const starship = starshipsData[Number(index)];
-    // const url = starship.url;
-    const pilots = starship.pilots;
+    const filmsURLs = starship.films;
+    const pilotsURLs = starship.pilots;
+
     const imgSrc: (starship: Starship) => string = (starship: Starship) => {
 
         const foundShip = starshipImg.find(ship => ship.name === starship.name);
-        console.log(foundShip);
-
         if (foundShip) {
             return foundShip.img;
         } else {
-
             return `${imgPlaceholder}`;
         }
+    };
 
-    }
+    // get films and pilots
+    const filmsInApi = "/films/";
+    const pilotsInApi = "/people/";
+
+    // Utiliza el custom hook para obtener los nombres de las películas y personajes
+    const filmNames = useGetNameData(filmsInApi, filmsURLs);
+    const pilotNames = useGetNameData(pilotsInApi, pilotsURLs);
 
     return (
         <>
@@ -51,12 +63,14 @@ const StarshipPage: React.FC<StarshipPageProps> = ({ starshipsData }) => {
                     </div>
                 </aside>
             </section >
-            <section className='flex justify-center items-center bg-black h-52'>
-            
-                <PilotsCard pilots={pilots} />
+            <section className='flex justify-evenly items-center bg-black h-72'>
+                <Cards dataArray={filmsURLs} route={"films"} nombre={filmNames} related={"Movies"}/>
+                <Cards dataArray={pilotsURLs} route={"characters"} nombre={pilotNames} related={"Pilots"} />
             </section>
         </>
     );
 };
 
 export default StarshipPage;
+
+

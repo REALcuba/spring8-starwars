@@ -9,9 +9,7 @@ const LoginForm: React.FC<LoginProps> = ({ setEmailValue, handleSubmitLogin, ema
 
     return (
         <>
-            <section className='bg-black  flex justify-center items-center bg-spacebg bg-cover bg-center p-6'>
-                {/* <p>Welcome star figther</p> */}
-                {/* <!-- Right column container with form --> */}
+            <section className='bg-black h-screen flex justify-center items-center bg-spacebg bg-cover bg-center p-6'>
                 <div className="md:w-6/12 lg:ml-6 lg:w-5/12 bg-white flex gap-4 rounded-lg justify-center ">
                     <div className="mx-6 w-2/3 ">
                         <form className="bg-white rounded-lg flex flex-col gap-6"

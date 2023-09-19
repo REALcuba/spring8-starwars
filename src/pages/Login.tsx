@@ -9,11 +9,8 @@ const Login: React.FC<LoginProps> = ({ setEmailValue, handleSubmitLogin, emailVa
         <>
             <Header />
             <Nav/>
-        {/* <section className=''> */}
             <LoginForm setEmailValue={setEmailValue} handleSubmitLogin={handleSubmitLogin} emailValue={emailValue} />
-            {/* <button className='bg-blue-500 rounded-2xl p-2' onClick={handleLogin}>Login</button> */}
 
-        {/* </section> */}
         </>
     )
 }
