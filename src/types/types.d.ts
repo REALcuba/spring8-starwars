@@ -41,7 +41,8 @@ export type StarshipPageProps = {
 export type LoginProps = {
     setEmailValue:Dispatch<SetStateAction<string>>, 
     handleSubmitLogin: FormEventHandler<HTMLFormElement> | undefined, 
-    emailValue:string
+    emailValue:string,
+    // isLogin:boolean
 }
 
 export type SignInProps = {

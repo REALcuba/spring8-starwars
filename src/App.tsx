@@ -4,10 +4,10 @@ import { useState, useEffect, FormEvent, SetStateAction } from "react";
 //styles
 // import './App.css'
 //components
-import Landing from './pages/Landing';
+import LandingPage from './pages/LandingPage';
 import MainPage from './pages/MainPage';
 import StarshipPage from './pages/StarshipPage';
-import Login from './pages/Login';
+import LoginPage from './pages/LoginPage';
 import SignIn from './pages/SignIn';
 import { Starship } from './types/types';
 import { Api } from './utils/fetchDataFromAPI';
@@ -134,14 +134,14 @@ function App() {
     <Routes>
       
         {/* <Route path='/main-page' element={<MainPage loading={loading} starshipsData={data} handleScroll={handleScroll} />} /> */}
-        <Route index element={<Landing />} />
+        <Route index element={<LandingPage />} />
        
       <Route element={<ProtectedRoute user={user} redirectPath={'login'} children={undefined} />}>
            <Route path='/main-page' element={<MainPage loading={loading} starshipsData={data} handleScroll={handleScroll} />} />
            <Route path='/starship-page/:index' element={<StarshipPage starshipsData={data} />} />
         </Route>
 
-      <Route path='/login' element={<Login setEmailValue={setEmailValue} handleSubmitLogin={handleSubmitLogin} emailValue={emailValue} />} />
+        <Route path='/login' element={<LoginPage setEmailValue={setEmailValue} handleSubmitLogin={handleSubmitLogin} emailValue={emailValue}  />} />
           <Route path='/sign-in' element={<SignIn handleSubmitSignIn={handleSubmitSignIn} setNameValue={setNameValue} setEmailValue={setEmailValue} emailValue={emailValue}/>} />
        
       <Route path="*" element={<p>There's nothing here: 404!</p>} />

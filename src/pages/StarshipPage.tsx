@@ -3,15 +3,17 @@ import { Starship, StarshipPageProps } from '../types/types';
 import { starshipImg } from '../assets/img/starships/starshipsImg';
 import imgPlaceholder from '../assets/img/placeholder.jpeg'
 import Cards from '../components/card/Cards';
-// import { useEffect } from 'react';
-// import {  useState } from 'react';
-// import { Api } from '../utils/fetchDataFromAPI';
-// import { Api } from '../utils/fetchDataFromAPI';
-import useGetNameData from '../components/customHooks/useGetNameData';
+import { useEffect, useState } from 'react';
+
+import UseGetNameData from '../components/customHooks/useGetNameData';
 
 
 const StarshipPage: React.FC<StarshipPageProps> = ({ starshipsData }) => {
- 
+    const [filmNames, setFilmNames] = useState<string[]>([]);
+    const [pilotNames, setPilotNames] = useState<string[]>([]);
+    const [filmLoading, setFilmLoading] = useState(true);
+    const [pilotLoading, setPilotLoading] = useState(true); 
+
     const { index } = useParams();
     const starship = starshipsData[Number(index)];
     const filmsURLs = starship.films;
@@ -32,8 +34,30 @@ const StarshipPage: React.FC<StarshipPageProps> = ({ starshipsData }) => {
     const pilotsInApi = "/people/";
 
     // Utiliza el custom hook para obtener los nombres de las películas y personajes
-    const filmNames = useGetNameData(filmsInApi, filmsURLs);
-    const pilotNames = useGetNameData(pilotsInApi, pilotsURLs);
+    const filmNamesArr = UseGetNameData(filmsInApi, filmsURLs);
+    const pilotNamesArr = UseGetNameData(pilotsInApi, pilotsURLs);
+    useEffect(() => {
+        const fetchingData = async () => {
+            setFilmLoading(true)
+            // try {
+            // const filmNamesArr = await UseGetNameData(filmsInApi, filmsURLs);
+            // const pilotNamesArr = await UseGetNameData(pilotsInApi, pilotsURLs);
+            setFilmNames(filmNamesArr)
+            setFilmLoading(false)
+            console.log(filmLoading);
+
+
+            setPilotNames(pilotNamesArr)
+            setPilotLoading(false)
+            // } catch (error) {
+            //     setFilmLoading(false)
+            //     setPilotLoading(false)
+            //     console.log(error);
+
+            // }
+        }
+        fetchingData()
+    }, [filmsInApi, pilotsInApi, filmsURLs, pilotsURLs, filmNamesArr, pilotNamesArr, filmLoading])
 
     return (
         <>
@@ -64,8 +88,14 @@ const StarshipPage: React.FC<StarshipPageProps> = ({ starshipsData }) => {
                 </aside>
             </section >
             <section className='flex justify-evenly items-center bg-black h-72'>
-                <Cards dataArray={filmsURLs} route={"films"} nombre={filmNames} related={"Movies"}/>
-                <Cards dataArray={pilotsURLs} route={"characters"} nombre={pilotNames} related={"Pilots"} />
+                {filmLoading || pilotLoading ? (
+                    <div className='text-white'>Loading...</div>
+                ) : (
+                    <>
+
+                        <Cards dataArray={filmsURLs} route={"films"} nombre={filmNames} related={"Movies"} />
+                        <Cards dataArray={pilotsURLs} route={"characters"} nombre={pilotNames} related={"Pilots"} />
+                    </>)}
             </section>
         </>
     );

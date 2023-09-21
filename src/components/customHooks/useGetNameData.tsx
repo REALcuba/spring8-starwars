@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { Api } from "../../utils/fetchDataFromAPI"; // Importa tu API
 
-const useGetNameData = (url: string, dataArray: string[]) => {
+const UseGetNameData = (url: string, dataArray: string[]) => {
     const [nameData, setNameData] = useState<string[]>([]);
+    // const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const fetchFilmAndCharacterData = async () => {
@@ -12,12 +13,14 @@ const useGetNameData = (url: string, dataArray: string[]) => {
                         const dataNum = dataUrl.replace(/\D/g, "");
                         const response = await Api.get(`${url}${dataNum}`);
                         // Asume que la respuesta contiene el nombre de la película o personaje
-                        const names = response.data.title || response.data.name; // Cambia esto según la estructura real de la respuesta
-                        return names;
+                        const getNames = response.data.title || response.data.name;
+                        return getNames;
                     })
                 );
 
                 setNameData(movieDataArray);
+                // setFilmLoading(false)
+                // setPilotLoading(false)
             } catch (error) {
                 console.log(error);
             }
@@ -29,4 +32,4 @@ const useGetNameData = (url: string, dataArray: string[]) => {
     return nameData;
 };
 
-export default useGetNameData;
+export default UseGetNameData;
