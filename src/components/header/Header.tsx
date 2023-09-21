@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 //components
 import SearchBar from '../searchBar/SearchBar'
-// import Login from '../../pages/Landing';
 //imagenes
 import swlogo from '../../assets/img/swlogo.jpeg';
 import FBsvg from '../../assets/svg/brand-facebook-filled.svg';
@@ -10,8 +9,9 @@ import instSvg from '../../assets/svg/brand-instagram.svg';
 import tw from '../../assets/svg/brand-twitter.svg';
 import yt from '../../assets/svg/brand-youtube.svg';
 
-const Header = () => {
+const Header = (emailValue: string) => {
   const [search, setSearch] = useState(false);
+  const [isLogin, setIsLogin] = useState(false)
   const navigate = useNavigate()
 
   const handleCancelSearch: () => void = () => {
@@ -19,8 +19,14 @@ const Header = () => {
     console.log(search);
 
   }
-  const getLogin = () => navigate('/login')
+  const getLogin = () => {
+    navigate('/login')
+    if (emailValue !== '') {
 
+      setIsLogin(true)
+    }
+  }
+  const logBtn = isLogin ? "LOG OUT " : "LOGIN"
   return (
     <>
       <header className=" bg-black grid grid-cols-4 justify-center ">
@@ -43,7 +49,8 @@ const Header = () => {
           <button className='text-gray-400 text-sm pr-6 /'
             onClick={getLogin}
           >
-            LOGIN
+            {logBtn}
+            {/* // LOGIN */}
           </button>
         </div>
       </header>

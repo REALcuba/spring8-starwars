@@ -1,33 +1,53 @@
 import { useParams } from 'react-router-dom';
-import { Starship, StarshipPageProps } from '../types/types';
-import { starshipImg } from '../assets/img/starships/starshipsImg';
-import imgPlaceholder from '../assets/img/placeholder.jpeg'
+import { StarshipPageProps } from '../types/types';
+// import { starshipImg } from '../assets/img/starships/starshipsImg';
+// import imgPlaceholder from '../assets/img/placeholder.jpeg'
 import Cards from '../components/card/Cards';
 import { useEffect, useState } from 'react';
 
-import UseGetNameData from '../components/customHooks/useGetNameData';
+import UseGetNameData from '../components/customHooks/UseGetNameData';
 
 
 const StarshipPage: React.FC<StarshipPageProps> = ({ starshipsData }) => {
+    const imgPlaceHolder = 'https://starwars-visualguide.com/assets/img/big-placeholder.jpg'
     const [filmNames, setFilmNames] = useState<string[]>([]);
     const [pilotNames, setPilotNames] = useState<string[]>([]);
     const [filmLoading, setFilmLoading] = useState(true);
     const [pilotLoading, setPilotLoading] = useState(true); 
+    const [displayedImgUrl, setDisplayedImgUrl] = useState(imgPlaceHolder);
+
 
     const { index } = useParams();
     const starship = starshipsData[Number(index)];
     const filmsURLs = starship.films;
     const pilotsURLs = starship.pilots;
 
-    const imgSrc: (starship: Starship) => string = (starship: Starship) => {
+    const dataUrl: string = starship.url;
+    const dataNum = dataUrl.replace(/\D/g, "");
 
-        const foundShip = starshipImg.find(ship => ship.name === starship.name);
-        if (foundShip) {
-            return foundShip.img;
-        } else {
-            return `${imgPlaceholder}`;
-        }
-    };
+    const imgUrl = `https://starwars-visualguide.com/assets/img/starships/${dataNum}.jpg`
+
+
+    useEffect(() => {
+        // Crea un elemento de imagen
+        const img = new Image();
+
+        // Establece un manejador de eventos para cargar con éxito la imagen
+        img.onload = function () {
+            // La imagen se ha cargado correctamente, actualiza el estado para mostrarla
+            setDisplayedImgUrl(imgUrl);
+        };
+
+        // Establece un manejador de eventos para el caso en que la imagen no se cargue correctamente
+        img.onerror = function () {
+            // La imagen no se ha cargado correctamente, muestra la imagen de marcador de posición
+            console.log('La imagen no se ha cargado correctamente, se mostrará la de marcador de posición.');
+            setDisplayedImgUrl(imgPlaceHolder);
+        };
+
+        // Asigna la URL de la imagen al elemento de imagen
+        img.src = imgUrl;
+    }, [dataNum, imgUrl, imgPlaceHolder]);
 
     // get films and pilots
     const filmsInApi = "/films/";
@@ -58,13 +78,13 @@ const StarshipPage: React.FC<StarshipPageProps> = ({ starshipsData }) => {
         }
         fetchingData()
     }, [filmsInApi, pilotsInApi, filmsURLs, pilotsURLs, filmNamesArr, pilotNamesArr, filmLoading])
-
+   
     return (
         <>
             <section className='flex content-center flex-col justify-between items-center text-center text-white bg-spacebg bg-cover'>
                 <h1>{starship.name.toUpperCase()}</h1>
                 <div>
-                    <picture><img src={imgSrc(starship)} alt="" /></picture>
+                    <picture><img src={displayedImgUrl} alt={starship.name} /></picture>
                 </div>
                 <div className='pt-3 '>
                     <p>MODEL: <span className='uppercase text-gray-400'> {starship.model}</span> </p>
