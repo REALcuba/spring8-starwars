@@ -1,8 +1,7 @@
 import Header from '../components/header/Header';
 import Nav from '../components/nav/Nav';
-// import Nav from '../components/nav/Nav';
 
-const Login: React.FC = () => {
+const LandingPage= () => {
 
     return (
         <section className='h-screen'>
@@ -15,4 +14,4 @@ const Login: React.FC = () => {
     )
 }
 
-export default Login
+export default LandingPage

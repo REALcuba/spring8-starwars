@@ -1,0 +1,7 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`LandingPage > body text should match Esta es la landing > Esta es la landing 1`] = `"Esta es la landing"`;
+
+exports[`LandingPage > should match Esta es la landing > Esta es la landing 1`] = `"Esta es la landing"`;
+
+exports[`LandingPage > should render correctly 1`] = `[Function]`;
