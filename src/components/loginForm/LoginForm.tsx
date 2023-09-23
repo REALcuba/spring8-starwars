@@ -36,8 +36,6 @@ const LoginForm: React.FC<LoginProps> = ({ setEmailValue, handleSubmitLogin, ema
                             <button
                                 type="submit"
                                 className="inline-block w-full rounded-full bg-yellow-400 px-7 py-3 "
-                            // onClick={handleLogin}
-                            // onSubmit={ setlocaleStorageClient(updatedClientsArr)}
                             >
                                 Continue
                             </button>

@@ -12,7 +12,7 @@ const Login: React.FC<LoginProps> = ({ setEmailValue, handleSubmitLogin, emailVa
 
     return (
         <>
-            <Header emailValue={emailValue} />
+            <Header />
             <Nav />
             <LoginForm setEmailValue={setEmailValue} handleSubmitLogin={handleSubmitLogin} emailValue={emailValue} />
 

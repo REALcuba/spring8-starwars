@@ -9,7 +9,7 @@ import instSvg from '../../assets/svg/brand-instagram.svg';
 import tw from '../../assets/svg/brand-twitter.svg';
 import yt from '../../assets/svg/brand-youtube.svg';
 
-const Header = (emailValue: string) => {
+const Header = () => {
   const [search, setSearch] = useState(false);
   const [isLogin, setIsLogin] = useState(false)
   const navigate = useNavigate()
@@ -21,10 +21,7 @@ const Header = (emailValue: string) => {
   }
   const getLogin = () => {
     navigate('/login')
-    if (emailValue !== '') {
-
-      setIsLogin(true)
-    }
+setIsLogin(!isLogin)
   }
   const logBtn = isLogin ? "LOG OUT " : "LOGIN"
   return (
