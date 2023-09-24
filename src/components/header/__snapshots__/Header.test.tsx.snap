@@ -1,3 +1,5 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Header > should render an input element 1`] = `[Function]`;
+
+exports[`Header > should render correctly 1`] = `undefined`;

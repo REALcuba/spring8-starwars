@@ -21,7 +21,7 @@ const Header = () => {
   }
   const getLogin = () => {
     navigate('/login')
-setIsLogin(!isLogin)
+    setIsLogin(!isLogin)
   }
   const logBtn = isLogin ? "LOG OUT " : "LOGIN"
   return (
@@ -47,7 +47,6 @@ setIsLogin(!isLogin)
             onClick={getLogin}
           >
             {logBtn}
-            {/* // LOGIN */}
           </button>
         </div>
       </header>
